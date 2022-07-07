@@ -1,17 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProductsService } from '../products.service';
+
 
 @Component({
   selector: 'khn-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
+
 export class ProductComponent implements OnInit {
 
-  productsName ="Khan book"
+ @Input() productName: string;
+ @Output() productClicked = new EventEmitter();
 
-  constructor() { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
+  }
+
+  onClicked() {
+    //this.productClicked.emit(this.productName);
+
+    this.productsService.deleteProduct(this.productName)
   }
 
 }
